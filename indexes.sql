@@ -8,7 +8,7 @@ CREATE INDEX idx_posts_product ON posts (product);
 CREATE INDEX idx_posts_score ON posts (score);
 
 -- 4th querie
-CREATE INDEX idx_posts_primary_key ON posts (username, postdate);
+-- CREATE INDEX idx_posts_primary_key ON posts (username, postdate);
 
 -- 5th querie
 CREATE INDEX idx_orders_clients_composite 
