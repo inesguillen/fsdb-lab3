@@ -2,7 +2,7 @@
 CREATE INDEX idx_posts_barcode ON posts (barcode) TABLESPACE TAB_16k;
 
 -- 2nd querie
-CREATE INDEX idx_posts_product ON posts (product) TABLESPACE TAB_16k;
+CREATE INDEX idx_posts_product ON posts (product);
 
 -- 3rd querie
 CREATE INDEX idx_posts_score ON posts (score) TABLESPACE TAB_16k;
