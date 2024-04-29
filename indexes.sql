@@ -1,3 +1,8 @@
+DROP INDEX idx_posts_barcode;
+DROP INDEX idx_posts_product;
+DROP INDEX idx_posts_score;
+
+
 -- 1st querie
 CREATE INDEX idx_posts_barcode ON posts (barcode) TABLESPACE TAB_16k;
 
