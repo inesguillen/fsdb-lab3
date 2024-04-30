@@ -1,6 +1,7 @@
 DROP INDEX idx_posts_barcode;
 DROP INDEX idx_posts_product;
-DROP INDEX idx_posts_score;
+alter table orders_clients drop clustering;
+DROP INDEX idx_client_lines_01;
 
 
 -- 1st querie
@@ -26,3 +27,21 @@ SELECT /*+ FULL(posts) PARALLEL(posts, 2) */ * from posts;
 
 
 -- 5th querie
+-- CREATE CLUSTER
+alter table orders_clients add clustering by linear order (username);
+alter table orders_clients move online;
+-- CREATE INDEX FOR SUCH CLUSTER
+CREATE INDEX idx_client_lines_01 ON client_lines ( username );
+
+-- CHECK
+set autotrace off
+column table_name format a30
+column clustering format a10
+
+select table_name,
+       clustering
+from   user_tables
+where table_name='ORDERS_CLIENTS'
+order by table_name;
+
+select index_name,column_name,column_position from all_ind_columns where table_name='ORDERS_CLIENTS' order by index_name,column_position;
