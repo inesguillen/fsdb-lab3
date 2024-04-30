@@ -5,20 +5,24 @@ DROP INDEX idx_posts_score;
 
 -- 1st querie
 CREATE INDEX idx_posts_barcode ON posts (barcode);
+-- Hint 1
+SELECT /*+ INDEX(posts idx_posts_barcode) */ * FROM Posts WHERE barcode = 'OII04455O419282';
+
 
 -- 2nd querie
 CREATE INDEX idx_posts_product ON posts (product);
+-- Hint 2
+SELECT /*+ INDEX(Posts idx_posts_product) */ * FROM Posts WHERE product = 'Compromiso';
+
 
 -- 3rd querie
-CREATE INDEX idx_posts_score ON posts (score);
+-- CREATE INDEX idx_posts_score ON posts (score); 
+-- ISN'T OPTIMAL 
+
 
 -- 4th querie
--- CREATE INDEX idx_posts_primary_key ON posts (username, postdate);
+-- WE USE A HINT
+SELECT /*+ FULL(posts) PARALLEL(posts, 2) */ * from posts;
+
 
 -- 5th querie
-CREATE INDEX idx_orders_clients_composite ON orders_clients (orderdate, username, town, country);
-
-CREATE INDEX idx_client_lines_composite ON client_lines (orderdate, username, town, country, barcode);
-
-------------------------
-CREATE INDEX idx_references_primary_key ON References (barcode);
